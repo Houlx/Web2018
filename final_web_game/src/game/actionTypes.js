@@ -1,2 +1,0 @@
-export const ADD_SCORE = 'GAME/ADD_SCORE';
-export const REMOVE_SCORE = 'GAME/REMOVE_SCORE';

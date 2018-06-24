@@ -1,5 +1,5 @@
 import operate from './operate'
-import isNumber from './isNumber'
+// import isNumber from './isNumber'
 
 export default function calculate(obj, buttonName) {
     if (buttonName === 'AC') {
@@ -10,7 +10,7 @@ export default function calculate(obj, buttonName) {
         };
     }
 
-    if (isNumber(buttonName)) {
+    // if (isNumber(buttonName)) {
         if (buttonName === '0' && obj.next === '0') {
             return {};
         }
