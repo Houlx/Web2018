@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Route, Link} from 'react-router-dom';
-import Game from './game';
-import Score from './Score';
+import Game from './game/game';
+import Score from './score/views/Score';
 
 class App extends Component {
     render() {
