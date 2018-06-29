@@ -1,88 +1,78 @@
 import operate from './operate'
-// import isNumber from './isNumber'
+import isNumber from './isNumber'
 
-export default function calculate(obj, buttonName) {
+export default (state, buttonName) => {
     if (buttonName === 'AC') {
         return {
-            total: null,
-            next: null,
-            operation: null,
+            total: '',
+            next: '',
+            operation: '',
         };
     }
 
-    // if (isNumber(buttonName)) {
-        if (buttonName === '0' && obj.next === '0') {
+    if (isNumber(buttonName)) {
+        if (buttonName === '0' && state.next === '0') {
             return {};
         }
 
-        if (obj.operation) {
-            if (obj.next) {
-                return {next: obj.next + buttonName};
+        if (state.operation) {
+            if (state.next) {
+                return {next: state.next + buttonName};
             }
             return {next: buttonName};
         }
 
-        if (obj.next) {
+        if (state.next) {
             return {
-                next: obj.next + buttonName,
-                total: null,
+                next: state.next + buttonName,
+                total: '',
             };
         }
 
         return {
             next: buttonName,
-            total: null,
+            total: '',
         };
     }
 
+
     if (buttonName === '.') {
-        if (obj.next) {
-            if (obj.next.includes('.')) {
+        if (state.next) {
+            if (state.next.includes('.')) {
                 return {};
             }
-            return {next: obj.next + '.'};
+            return {next: state.next + '.'};
         }
-
-        if (obj.operation) {
-            return {next: '0.'};
-        }
-
-        if (obj.total) {
-            if (obj.total.includes('.')) {
-                return {};
-            }
-            return {total: obj.total + '.'};
-        }
-        return {total: '0.'};
+        return {next: '0.'};
     }
 
     if (buttonName === '=') {
-        if (obj.next && obj.operation) {
+        if (state.next && state.operation) {
             return {
-                total: operate(obj.total, obj.next, obj.operation),
-                next: null,
-                operation: null,
+                total: operate(state.total, state.next, state.operation),
+                next: '',
+                operation: '',
             };
         } else {
             return {};
         }
     }
 
-    if (obj.operation) {
+    if (state.operation) {
         return {
-            total: operate(obj.total, obj.next, obj.operation),
-            next: null,
+            total: operate(state.total, state.next, state.operation),
+            next: '',
             operation: buttonName,
         };
     }
 
-    if (!obj.next) {
+    if (!state.next) {
         return {operation: buttonName};
     }
 
     return {
-        total: obj.next,
-        next: null,
+        total: state.next,
+        next: '',
         operation: buttonName,
     };
 }

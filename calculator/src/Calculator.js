@@ -1,29 +1,31 @@
 import React, {Component} from 'react';
-import Display from './Display'
 import ButtonPanel from './ButtonPanel'
 import calculate from './logic/calculate'
 
-class CalCulator extends Component {
+class Calculator extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            total: null,
-            next: null,
-            operation: null,
+            total: '',
+            next: '',
+            operation: '',
         };
     }
 
-    handleClick = (buttonName) => {
+    onClick = (buttonName) => {
         this.setState(calculate(this.state, buttonName));
-    }
+    };
 
     render() {
         return (
             <div>
-                <Display value={this.state.next || this.state.total || '0'}/>
-                <ButtonPanel clickHandler={this.handleClick}/>
+                <div>
+                    {this.state.next || this.state.total || '0'}
+                </div>
+                <ButtonPanel clickHandler={this.onClick}/>
             </div>
         );
     }
 }
-export default CalCulator;
+
+export default Calculator;
